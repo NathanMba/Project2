@@ -1,22 +1,29 @@
 package hospitalManagementSystem;
 
 public class Hospital {
-    private static Person[] listPerson;
-    private static Appointment[] listAppointment;
-    private static int personCounter;
-    private  static int appointmentCounter;
+    private Person[] listPerson;
+    private Appointment[] listAppointment;
+    private int totalPerson;
+    private  int totalAppointment;
 
     public Hospital(int hospitalSize, int appointmentSize){
         listPerson = new Person[hospitalSize];
         listAppointment = new Appointment[appointmentSize];
-        personCounter = 0;
-        appointmentCounter = 0;
+        totalPerson = 0;
+        totalAppointment = 0;
     }
 
     public void addPerson(Person newPerson){
-        if (personCounter < listPerson.length){
-            listPerson[personCounter] = newPerson;
-            personCounter++;
+
+        for (int  i = 0; i < totalAppointment; i++){
+            if (newPerson.getId().equals(listPerson[i].getId())){
+                throw new IllegalArgumentException("A person with the same ID \"" + newPerson.getId() + "\" already exist in the hospital. ");
+            }
+        }
+
+        if (totalPerson < listPerson.length){
+            listPerson[totalPerson] = newPerson;
+            totalPerson++;
             System.out.println("Added person: " + newPerson.getDetails());
         }
         else{
@@ -26,17 +33,23 @@ public class Hospital {
     }
 
     public void addAppointment(Appointment newAppointment){
-        if (appointmentCounter >= listAppointment.length ){
+        if (totalAppointment >= listAppointment.length ){
             throw new IllegalArgumentException("Appointment capacity reached!");
 
         }
+        for (int  i = 0; i < totalAppointment; i++){
+            if (newAppointment.getAppointmentId().equals(listAppointment[i].getAppointmentId())){
+                throw new IllegalArgumentException("An appointment with the same ID \"" + newAppointment.getAppointmentId() + "\" already exist in the list of appointments.");
+            }
+        }
+
         Person person1 = newAppointment.getPatient();
         Person person2 = newAppointment.getDoctor();
 
         boolean exist1 = false;
         boolean exist2 = false;
 
-        for (int  i = 0; i < personCounter; i++){
+        for (int  i = 0; i < totalPerson; i++){
             if ((listPerson[i].equals(person1))){
                 exist1 = true;
             }
@@ -49,9 +62,9 @@ public class Hospital {
         }
 
         if (exist1 && exist2){
-            if (appointmentCounter < listAppointment.length){
-                listAppointment[appointmentCounter]= newAppointment;
-                appointmentCounter++;
+            if (totalAppointment < listAppointment.length){
+                listAppointment[totalAppointment]= newAppointment;
+                totalAppointment++;
                 System.out.println("Added appointment: " + newAppointment.toString());
             }
         }
@@ -63,24 +76,24 @@ public class Hospital {
     }
 
     public void listAllPersons(){
-        if (personCounter == 0) {
-            System.out.println("There is no person registered in the hospital");
+        if (totalPerson == 0) {
+            System.out.println("There is no person registered in the hospital.");
         }
         else {
             System.out.println("\n \"--- Hospital Persons List ---\"");
-            for (int i = 0; i < personCounter; i++) {
+            for (int i = 0; i < totalPerson; i++) {
                 System.out.println(listPerson[i].getDetails());
             }
         }
     }
 
     public void listAppointments(){
-        if (appointmentCounter == 0) {
+        if (totalAppointment == 0) {
             System.out.println("There is no appointment registered in the hospital");
         }
         else {
             System.out.println("\n \"--- Hospital Appointments List ---\"");
-            for (int i = 0; i < appointmentCounter; i++) {
+            for (int i = 0; i < totalAppointment; i++) {
                 System.out.println(listAppointment[i].toString());
             }
         }
@@ -88,7 +101,7 @@ public class Hospital {
 
     public void searchPerson(String researchedId){
         boolean state = false;
-        for (int i = 0; i < personCounter; i++){
+        for (int i = 0; i < totalPerson; i++){
             if (researchedId.equals(listPerson[i].getId())){
                 System.out.println("Found person: " + listPerson[i].getDetails());
                 state = true;
@@ -103,11 +116,11 @@ public class Hospital {
     public void simulateDay(){
         System.out.println("\n Simulating day in the hospital...");
 
-        if (appointmentCounter == 0){
+        if (totalAppointment == 0){
             System.out.println("there is nothing to do in the Hospital");
         }
         else{
-            for (int i = 0; i < appointmentCounter; i++){
+            for (int i = 0; i < totalAppointment; i++){
                 Doctor person1 = listAppointment[i].getDoctor();
                 Patient person2 = listAppointment[i].getPatient();
 
@@ -117,57 +130,57 @@ public class Hospital {
         }
     }
 
-    public static String printHospitalStatistics(){
+    public int getTotalAppointment() {
+        return totalAppointment;
+    }
+
+    public int getTotalPerson() {
+        return totalPerson;
+    }
+
+    public Appointment[] getListAppointment() {
+        return listAppointment;
+    }
+
+    public Person[] getListPerson() {
+        return listPerson;
+    }
+
+    public void setTotalAppointment(int totalAppointment) {
+        this.totalAppointment = totalAppointment;
+    }
+
+    public void setTotalPerson(int totalPerson) {
+        this.totalPerson = totalPerson;
+    }
+
+    public void setListAppointment(Appointment[] listAppointment) {
+        this.listAppointment = listAppointment;
+    }
+
+    public void setListPerson(Person[] listPerson) {
+        this.listPerson = listPerson;
+    }
+
+    public static String printHospitalStatistics(Hospital hospital){
         System.out.println("--- Hospital Statistics ---");
 
         int numberOfDoctors = 0;
         int numberOfPatients = 0;
-        for (int i = 0; i < personCounter; i++){
-            if (listPerson[i] instanceof Doctor ){
+        for (int i = 0; i < hospital.getTotalPerson(); i++){
+            if (hospital.getListPerson()[i] instanceof Doctor ){
                 numberOfDoctors++;
             }
-            if (listPerson[i] instanceof Patient ){
+            if (hospital.getListPerson()[i] instanceof Patient ){
                 numberOfPatients++;
             }
 
         }
-        String information = "Total Persons: " + personCounter + "\"\n" + "Number of Patients: " + numberOfPatients + "\"\n" + "Number of Doctors: " + numberOfDoctors + "\"\n" + "Total Appointments: " + appointmentCounter;
+        String information = "Total Persons: " + hospital.totalPerson + "\"\n" + "Number of Patients: " + numberOfPatients + "\"\n" + "Number of Doctors: " + numberOfDoctors + "\"\n" + "Total Appointments: " + hospital.totalAppointment;
 
         System.out.println(information);
         return information;
-
-
     }
 
-    public static int getAppointmentCounter() {
-        return appointmentCounter;
-    }
 
-    public static int getPersonCounter() {
-        return personCounter;
-    }
-
-    public static Appointment[] getListAppointment() {
-        return listAppointment;
-    }
-
-    public static Person[] getListPerson() {
-        return listPerson;
-    }
-
-    public static void setAppointmentCounter(int appointmentCounter) {
-        Hospital.appointmentCounter = appointmentCounter;
-    }
-
-    public static void setPersonCounter(int personCounter) {
-        Hospital.personCounter = personCounter;
-    }
-
-    public static void setListAppointment(Appointment[] listAppointment) {
-        Hospital.listAppointment = listAppointment;
-    }
-
-    public static void setListPerson(Person[] listPerson) {
-        Hospital.listPerson = listPerson;
-    }
 }

@@ -4,7 +4,7 @@ public class Patient extends Person implements Schedulable{
     private String symptoms;
     private int medicalRecordNumber;
 
-    public Patient(String name, int age,int id, String symptoms, int medicalRecordNumber){
+    public Patient(String name, int age,String id, String symptoms, int medicalRecordNumber){
         super(name, age, id);
         this.symptoms = symptoms;
         this.medicalRecordNumber = medicalRecordNumber;
