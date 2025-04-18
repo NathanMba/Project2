@@ -3,7 +3,7 @@ package hospitalManagementSystem;
 public abstract class Person {
     private String name;
     private int age;
-    private int id;
+    private String id;
 
     public Person(String name, int age, int id){
         this.name = name;
@@ -27,7 +27,7 @@ public abstract class Person {
         return age;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
