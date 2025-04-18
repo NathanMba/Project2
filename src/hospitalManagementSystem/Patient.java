@@ -35,4 +35,8 @@ public class Patient extends Person implements Schedulable{
     public String getSymptoms() {
         return symptoms;
     }
+
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
+    }
 }

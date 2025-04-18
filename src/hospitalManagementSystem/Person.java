@@ -5,7 +5,7 @@ public abstract class Person {
     private int age;
     private String id;
 
-    public Person(String name, int age, int id){
+    public Person(String name, int age, String id){
         this.name = name;
         this.age = age;
         this.id = id;
@@ -31,5 +31,16 @@ public abstract class Person {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 

@@ -5,7 +5,7 @@ public class Doctor extends Person implements Schedulable{
     private int licenseNumber;
     private double consultationFee;
 
-    public Doctor(String name, int age, int id, String speciality, int licenseNumber, double consultationFee){
+    public Doctor(String name, int age, String id, String speciality, int licenseNumber, double consultationFee){
         super(name, age, id);
         this.speciality = speciality;
         this.licenseNumber = licenseNumber;
@@ -31,5 +31,29 @@ public class Doctor extends Person implements Schedulable{
         String information = "Dr. " + this.getName() + " is diagnosing patient " + patient.getName() + ".";
         System.out.println(information);
         return information;
+    }
+
+    public double getConsultationFee() {
+        return consultationFee;
+    }
+
+    public int getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setConsultationFee(double consultationFee) {
+        this.consultationFee = consultationFee;
+    }
+
+    public void setLicenseNumber(int licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 }

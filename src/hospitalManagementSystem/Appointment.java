@@ -7,6 +7,14 @@ public class Appointment {
     private String dateTime;
     private String reason;
 
+    public Appointment(String AppointmentId, Patient patient, Doctor doctor, String dateTime, String reason ){
+        this.AppointmentId = AppointmentId;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.dateTime = dateTime;
+        this.reason = reason;
+    }
+
     public String getReason() {
         return reason;
     }
@@ -48,14 +56,13 @@ public class Appointment {
     }
 
     public String toString(){
-        String informations = "Appointment{" +
+        return "Appointment{" +
                 "ID='" + this.getAppointmentId() + '\'' +
                 ", Patient=" + patient.getName() +
                 ", Doctor=" + doctor.getName() +
                 ", DateTime='" + this.getDateTime() + '\'' +
                 ", Reason='" + this.getReason() + '\'' +
                 '}';
-        System.out.println(informations);
-        return informations;
     }
+
 }
