@@ -99,6 +99,30 @@ public class Hospital {
         }
     }
 
+    public Patient getPatientById(String patientId){
+        for (int i = 0; i < totalPerson; i++){
+            if (listPerson[i] instanceof Patient){
+                Patient patient = (Patient) listPerson[i];
+                if (patientId.equals(patient.getId())){
+                    return patient;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Doctor getDoctorById(String doctorId){
+        for (int i = 0; i < totalPerson; i++){
+            if (listPerson[i] instanceof Doctor){
+                Doctor doctor = (Doctor) listPerson[i];
+                if (doctorId.equals(doctor.getId())){
+                    return doctor;
+                }
+            }
+        }
+        return null;
+    }
+
     public void searchPerson(String researchedId){
         boolean state = false;
         for (int i = 0; i < totalPerson; i++){
