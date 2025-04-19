@@ -58,10 +58,10 @@ public class Appointment {
     public String toString(){
         return "Appointment{" +
                 "ID='" + this.getAppointmentId() + '\'' +
-                ", Patient=" + patient.getName() +
-                ", Doctor=" + doctor.getName() +
-                ", DateTime='" + this.getDateTime() + '\'' +
-                ", Reason='" + this.getReason() + '\'' +
+                ", Patient= " + patient.getName() +
+                ", Doctor= " + doctor.getName() +
+                ", DateTime= '" + this.getDateTime() + '\'' +
+                ", Reason= '" + this.getReason() + '\'' +
                 '}';
     }
 

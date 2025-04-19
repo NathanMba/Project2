@@ -138,7 +138,7 @@ public class Hospital {
     }
 
     public void simulateDay(){
-        System.out.println("\n Simulating day in the hospital...");
+        System.out.println("\nSimulating day in the hospital...");
 
         if (totalAppointment == 0){
             System.out.println("there is nothing to do in the Hospital");
@@ -200,7 +200,7 @@ public class Hospital {
             }
 
         }
-        String information = "Total Persons: " + hospital.totalPerson + "\"\n" + "Number of Patients: " + numberOfPatients + "\"\n" + "Number of Doctors: " + numberOfDoctors + "\"\n" + "Total Appointments: " + hospital.totalAppointment;
+        String information = "Total Persons: " + hospital.totalPerson + "\n" + "Number of Patients: " + numberOfPatients + "\n" + "Number of Doctors: " + numberOfDoctors + "\n" + "Total Appointments: " + hospital.totalAppointment;
 
         System.out.println(information);
         return information;
