@@ -17,7 +17,7 @@ public class Hospital {
 
         for (int  i = 0; i < totalPerson; i++){
             if (newPerson.getId().equals(listPerson[i].getId())){
-                throw new IllegalArgumentException("A person with the same ID \"" + newPerson.getId() + "\" already exist in the hospital. \n");
+                throw new IllegalArgumentException("A person with the same ID \"" + newPerson.getId() + "\" already exist in the hospital.");
             }
         }
 
