@@ -11,7 +11,7 @@ public class Main {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("--- Hospital Management System Menu ---");
+            System.out.println("\n--- Hospital Management System Menu ---");
             System.out.println("1. Register Person (Patient/Doctor)");
             System.out.println("2. Schedule Appointment");
             System.out.println("3. List All Persons");
@@ -92,14 +92,37 @@ public class Main {
 
                 System.out.print("Enter Patient ID: ");
                 String patientId = scanner.nextLine();
+                try {
+                    hospital.checkPatientIsPatient(patientId, hospital);
+                }catch(IllegalArgumentException e){
+                    System.out.print(e.getMessage());
+                    return;
+                }
                 Patient patient = hospital.getPatientById(patientId);
 
                 System.out.print("Enter Doctor ID: ");
                 String doctorId = scanner.nextLine();
+                try {
+                    hospital.checkDoctorIsDoctor(doctorId, hospital);
+                }catch(IllegalArgumentException e){
+                    System.out.print(e.getMessage());
+                    return;
+                }
                 Doctor doctor = hospital.getDoctorById(doctorId);
 
-                System.out.print("Enter Date time (example: 2025.05.28 17:53): ");
-                String dateTime = scanner.nextLine();
+                String dateTime;
+                while (true) {
+                    System.out.print("Enter Date time (example: 2025.05.28 17:53): ");
+                    dateTime = scanner.nextLine();
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+                    try {
+                        LocalDateTime.parse(dateTime, formatter);
+                        break;
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid format for the date time, use this format \"year.month.day HH:MM\" (example: 2025.05.28 17:53)  ");
+                    }
+                }
 
                 System.out.print("Enter reason: ");
                 String reason = scanner.nextLine();

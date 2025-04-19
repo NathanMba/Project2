@@ -15,9 +15,9 @@ public class Hospital {
 
     public void addPerson(Person newPerson){
 
-        for (int  i = 0; i < totalAppointment; i++){
+        for (int  i = 0; i < totalPerson; i++){
             if (newPerson.getId().equals(listPerson[i].getId())){
-                throw new IllegalArgumentException("A person with the same ID \"" + newPerson.getId() + "\" already exist in the hospital. ");
+                throw new IllegalArgumentException("A person with the same ID \"" + newPerson.getId() + "\" already exist in the hospital. \n");
             }
         }
 
@@ -122,6 +122,18 @@ public class Hospital {
         }
         return null;
     }
+
+    public void checkPatientIsPatient(String id, Hospital hospital){
+        if (hospital.getDoctorById(id) != null){
+            throw new IllegalArgumentException("Appointments are only schedulable between a Patient and a Doctor.");
+        }
+    }
+    public void checkDoctorIsDoctor(String id, Hospital hospital){
+        if (hospital.getPatientById(id) != null){
+            throw new IllegalArgumentException("Appointments are only schedulable between a Patient and a Doctor.");
+        }
+    }
+
 
     public void searchPerson(String researchedId){
         boolean state = false;

@@ -27,10 +27,9 @@ public class Doctor extends Person implements Schedulable{
         return "Doctor";
     }
 
-    public String diagnose(Patient patient){
+    public void diagnose(Patient patient){
         String information = "Dr. " + this.getName() + " is diagnosing patient " + patient.getName() + ".";
         System.out.println(information);
-        return information;
     }
 
     public double getConsultationFee() {
