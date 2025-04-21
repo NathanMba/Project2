@@ -6,6 +6,7 @@ public class Appointment {
     private Doctor doctor;
     private String dateTime;
     private String reason;
+    private static int apptCounter = 0;
 
     public Appointment(String AppointmentId, Patient patient, Doctor doctor, String dateTime, String reason ){
         this.AppointmentId = AppointmentId;
@@ -15,6 +16,10 @@ public class Appointment {
         this.reason = reason;
     }
 
+    public static String generateAppointmentId(){
+        apptCounter++;
+        return "APT-" + apptCounter;
+    }
     public String getReason() {
         return reason;
     }
@@ -57,11 +62,11 @@ public class Appointment {
 
     public String toString(){
         return "Appointment{" +
-                "ID='" + this.getAppointmentId() + '\'' +
-                ", Patient= " + patient.getName() +
-                ", Doctor= " + doctor.getName() +
-                ", DateTime= '" + this.getDateTime() + '\'' +
-                ", Reason= '" + this.getReason() + '\'' +
+                "ID='" + AppointmentId + '\'' +
+                ", Patient=" + patient.getName() + // Uses patient's name
+                ", Doctor=" + doctor.getName() +   // Uses doctor's name
+                ", DateTime='" + dateTime + '\'' +
+                ", Reason='" + reason + '\'' +
                 '}';
     }
 

@@ -2,10 +2,10 @@ package hospitalManagementSystem;
 
 public class Doctor extends Person implements Schedulable{
     private String speciality;
-    private int licenseNumber;
+    private String licenseNumber;
     private double consultationFee;
 
-    public Doctor(String name, int age, String id, String speciality, int licenseNumber, double consultationFee){
+    public Doctor(String id,String name ,int age, String speciality, String licenseNumber, double consultationFee){
         super(name, age, id);
         this.speciality = speciality;
         this.licenseNumber = licenseNumber;
@@ -13,13 +13,18 @@ public class Doctor extends Person implements Schedulable{
 
     }
 
-    public void scheduleAppointment(String dateTime, Person otherParty ,String reason){
+    public Appointment scheduleAppointment(String dateTime, Person otherParty ,String reason){
         if (!(otherParty instanceof Patient)){
-            throw new IllegalArgumentException ("Doctors can only schedule appointments with Patients.");
+
+            System.out.print ("Error: Doctors can only schedule appointments with Patients.");
+            return null;
+
         }
         else {
             System.out.println("Doctor " + this.getName() + " has scheduled an appointment with Patient "
                     + otherParty.getName() + " at " + dateTime + ".");
+            Appointment appointment = new Appointment(Appointment.generateAppointmentId(), (Patient) otherParty, this, dateTime, reason );
+            return appointment;
         }
     }
 
@@ -36,11 +41,11 @@ public class Doctor extends Person implements Schedulable{
         return consultationFee;
     }
 
-    public int getLicenseNumber() {
+    public String getLicenseNumber() {
         return licenseNumber;
     }
 
-    public String getSpeciality() {
+    public String getSpecialty() {
         return speciality;
     }
 
@@ -48,11 +53,11 @@ public class Doctor extends Person implements Schedulable{
         this.consultationFee = consultationFee;
     }
 
-    public void setLicenseNumber(int licenseNumber) {
+    public void setLicenseNumber(String licenseNumber) {
         this.licenseNumber = licenseNumber;
     }
 
-    public void setSpeciality(String speciality) {
+    public void setSpecialty(String speciality) {
         this.speciality = speciality;
     }
 }

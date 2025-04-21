@@ -1,10 +1,11 @@
 package hospitalManagementSystem;
-import java.util.Scanner;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
-public class Main {
+public class HospitalManagementSystem {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Hospital hospital = new Hospital(4, 5);
@@ -45,10 +46,10 @@ public class Main {
                     String patientSymptoms = scanner.nextLine();
 
                     System.out.print("Enter Medical Record Number: ");
-                    int patientMedicalRecordNumber = scanner.nextInt();
-                    scanner.nextLine();
+                    String patientMedicalRecordNumber = scanner.nextLine();
 
-                    Patient patient = new Patient(patientName, patientAge, patientId, patientSymptoms, patientMedicalRecordNumber);
+
+                    Patient patient = new Patient(patientId, patientName,patientAge, patientSymptoms, patientMedicalRecordNumber);
                     try {
                         hospital.addPerson(patient);
                     } catch (IllegalArgumentException e) {
@@ -69,13 +70,13 @@ public class Main {
                     String doctorSpeciality = scanner.nextLine();
 
                     System.out.print("Enter licenseNumber: ");
-                    int doctorLicenseNumber = scanner.nextInt();
-                    scanner.nextLine();
+                    String doctorLicenseNumber = scanner.nextLine();
+
 
                     System.out.print("Enter consultationFee: ");
                     double consultationFee = scanner.nextDouble();
 
-                    Doctor doctor = new Doctor(doctorName, doctorAge, doctorId, doctorSpeciality, doctorLicenseNumber, consultationFee);
+                    Doctor doctor = new Doctor(doctorId, doctorName,doctorAge , doctorSpeciality, doctorLicenseNumber, consultationFee);
 
                     try {
                         hospital.addPerson(doctor);

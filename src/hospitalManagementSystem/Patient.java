@@ -2,21 +2,25 @@ package hospitalManagementSystem;
 
 public class Patient extends Person implements Schedulable{
     private String symptoms;
-    private int medicalRecordNumber;
+    private String medicalRecordNumber;
 
-    public Patient(String name, int age,String id, String symptoms, int medicalRecordNumber){
+    public Patient(String id, String name,int age, String symptoms, String medicalRecordNumber){
         super(name, age, id);
         this.symptoms = symptoms;
         this.medicalRecordNumber = medicalRecordNumber;
 
     }
-    public void scheduleAppointment(String dateTime, Person otherParty ,String reason){
+    public Appointment scheduleAppointment(String dateTime, Person otherParty ,String reason){
         if (!(otherParty instanceof Doctor)){
-            throw new IllegalArgumentException ("Patients can only schedule appointments with Doctors.");
+            System.out.print("Error: Patients can only schedule appointments with Doctors.");
+            return null;
+
         }
         else {
             System.out.println("Patient " + this.getName() + " has scheduled an appointment with Doctor "
                     + otherParty.getName()  + " at " + dateTime + ".");
+            Appointment appointment = new Appointment (Appointment.generateAppointmentId(), this, (Doctor) otherParty, dateTime, reason);
+            return appointment;
         }
     }
 
@@ -24,11 +28,11 @@ public class Patient extends Person implements Schedulable{
         return "Patient";
     }
 
-    public int getMedicalRecordNumber(){
+    public String getMedicalRecordNumber(){
         return medicalRecordNumber;
     }
 
-    public void setMedicalRecordNumber(int medicalRecordNumber){
+    public void setMedicalRecordNumber(String medicalRecordNumber){
         this.medicalRecordNumber = medicalRecordNumber;
     }
 

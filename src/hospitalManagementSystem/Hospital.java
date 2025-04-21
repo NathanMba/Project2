@@ -5,6 +5,7 @@ public class Hospital {
     private Appointment[] listAppointment;
     private int totalPerson;
     private  int totalAppointment;
+    private final String EOL = "\n";
 
     public Hospital(int hospitalSize, int appointmentSize){
         listPerson = new Person[hospitalSize];
@@ -65,7 +66,7 @@ public class Hospital {
             if (totalAppointment < listAppointment.length){
                 listAppointment[totalAppointment]= newAppointment;
                 totalAppointment++;
-                System.out.println("Added appointment: " + newAppointment.toString());
+                System.out.println("Added appointment: " + newAppointment);
             }
         }
         else{
@@ -77,10 +78,10 @@ public class Hospital {
 
     public void listAllPersons(){
         if (totalPerson == 0) {
-            System.out.println("There is no person registered in the hospital.");
+            System.out.print( EOL + "--- Hospital Persons List ---" + EOL);
         }
         else {
-            System.out.println("\n \"--- Hospital Persons List ---\"");
+            System.out.println(EOL + "--- Hospital Persons List ---");
             for (int i = 0; i < totalPerson; i++) {
                 System.out.println(listPerson[i].getDetails());
             }
@@ -89,10 +90,10 @@ public class Hospital {
 
     public void listAppointments(){
         if (totalAppointment == 0) {
-            System.out.println("There is no appointment registered in the hospital");
+            System.out.println(EOL + "--- Hospital Appointments List ---");
         }
         else {
-            System.out.println("\n \"--- Hospital Appointments List ---\"");
+            System.out.println(EOL + "--- Hospital Appointments List ---");
             for (int i = 0; i < totalAppointment; i++) {
                 System.out.println(listAppointment[i].toString());
             }
@@ -135,35 +136,31 @@ public class Hospital {
     }
 
 
-    public void searchPerson(String researchedId){
-        boolean state = false;
+    public Person searchPerson(String researchedId){
         for (int i = 0; i < totalPerson; i++){
             if (researchedId.equals(listPerson[i].getId())){
                 System.out.println("Found person: " + listPerson[i].getDetails());
-                state = true;
-                break;
+                return listPerson[i];
             }
         }
-        if (!state){
-            System.out.println("The person with the provided ID: " + researchedId + " is not founded in the hospital.");
-        }
+        System.out.println("");
+        return null;
+
+
+
     }
 
     public void simulateDay(){
-        System.out.println("\nSimulating day in the hospital...");
+        System.out.print(System.lineSeparator() + "Simulating day in the hospital..." + System.lineSeparator());
 
-        if (totalAppointment == 0){
-            System.out.println("there is nothing to do in the Hospital");
-        }
-        else{
-            for (int i = 0; i < totalAppointment; i++){
-                Doctor person1 = listAppointment[i].getDoctor();
-                Patient person2 = listAppointment[i].getPatient();
+        for (int i = 0; i < totalAppointment; i++){
+            Doctor person1 = listAppointment[i].getDoctor();
+            Patient person2 = listAppointment[i].getPatient();
 
-                person1.diagnose(person2);
-                System.out.println(listAppointment[i].toString());
-            }
+            person1.diagnose(person2);
+            System.out.println("Appointment details: " + listAppointment[i].toString());
         }
+
     }
 
     public int getTotalAppointment() {

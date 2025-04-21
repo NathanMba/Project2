@@ -14,9 +14,7 @@ public abstract class Person {
     abstract String getRole();
 
     public String getDetails(){
-        String information = "ID: " + id + ", Name: " + name  + ", Age: " + age  + ", Role: " + getRole();
-       System.out.println(information);
-       return information;
+       return "ID: " + id + ", Name: " + name  + ", Age: " + age  + ", Role: " + getRole();
     }
 
     public String getName() {
